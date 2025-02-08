@@ -243,6 +243,8 @@ def trimAndLoadJson(
     jsonStr = input_string[start:end] if start != -1 and end != 0 else ""
     # Remove trailing comma if one is present
     jsonStr = re.sub(r",\s*([\]}])", r"\1", jsonStr)
+    # Ensure use of valid JSON boolean values
+    jsonStr = jsonStr.replace("True", "true").replace("False", "false")
 
     try:
         return json.loads(jsonStr)
